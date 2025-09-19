@@ -1,0 +1,13 @@
+mat-card-title {
+  text-align: center;
+}
+
+mat-card {
+  padding: 20px;
+}
+
+.mat-flat-button.mat-primary {
+  width: 180px;
+  margin-bottom: 10px;
+  background-color: #3f51b5;
+}

@@ -1,0 +1,187 @@
+/*Typography and buttons*/
+h2 span, h3 span, h4 span, h5 span, h6 span{color:#1cbbb4;}
+
+a.button_intro, .button_intro  {background: #1cbbb4;}
+
+a.button_intro:hover, .button_intro:hover {color:#1cbbb4 !important;}
+
+a.button_intro:hover, .button_intro:hover {color:#1cbbb4;}
+
+a.button_drop, .button_drop  {color:#1cbbb4 !important;}
+a.button_drop.outilne, .button_drop.outline  {color:#1cbbb4;}
+
+a.btn_1, .btn_1{background: #1cbbb4;}
+a.btn_1.white, .btn_1.white  {color:#1cbbb4;}
+
+a.btn_1.outline:hover,.btn_1.outiline:hover, input .btn_1.outiline:hover{background:#1cbbb4;border:2px solid #1cbbb4;}
+a.btn_1:hover, .btn_1:hover {background: #333;}
+
+a.btn_map{background: #1cbbb4;}
+
+a {color: #1cbbb4;}
+
+#search .btn_1.green{background: #1cbbb4;}
+
+/* Header */
+header#colored.sticky{background-color:#1cbbb4; border-bottom:2px solid #1cbbb4}
+
+.dropdown-cart .dropdown-menu {border-top: 2px solid #1cbbb4;}
+.dropdown-cart .dropdown-menu:before {border-bottom-color: #1cbbb4;}
+
+ul#cart_items li strong > a:hover{color:#1cbbb4;}
+
+ul#top_links a{
+	color:#fff;
+}
+ul#top_links a:hover{
+	color:#1cbbb4;
+}
+
+ul#top_tools a{ color:#fff;}
+ul#top_tools a:hover {color:#1cbbb4;}
+
+ .dropdown-mini .dropdown-menu {
+    border-top: 2px solid #1cbbb4;
+}
+ .dropdown-mini .dropdown-menu:before {
+	border-bottom-color: #1cbbb4;
+}
+ .dropdown-mini .dropdown-menu ul#lang_menu li a{
+	 color:#555 !important;
+}
+
+ .dropdown-mini .dropdown-menu ul#lang_menu li a:hover{
+	 color:#1cbbb4 !important;
+}
+
+a.cart_bt strong {background-color: #1cbbb4;}
+
+/* Content and common */
+#search .nav-tabs > li.active > a,
+#search .nav-tabs > li.active > a:hover,
+#search .nav-tabs > li.active > a:focus {
+  background-color: #1cbbb4;
+ }
+ .cbp_tmtimeline:before {
+	background: #1cbbb4 !important;
+}
+.cbp_tmtimeline > li .cbp_tmicon {
+	color: #1cbbb4 !important;
+	box-shadow: 0 0 0 3px #1cbbb4 !important;
+}
+.input-group button:hover, .input-group button:focus {background-color:#1cbbb4; border-color:#1cbbb4}
+
+.other_tours ul li a:hover{color:#1cbbb4;}
+
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {background: #1cbbb4;} 
+.form_title h3 strong{background-color:#1cbbb4;}
+.features-content {background-color: #1cbbb4;}
+#Img_carousel .sp-selected-thumbnail {border-bottom: 2px solid #1cbbb4;}
+
+
+#directions { background-color:#1cbbb4; }
+
+ul.list_ok li:before {color:#1cbbb4;}
+ul.list_order li span {background-color:#1cbbb4;}
+
+.tooltip-back {background: #1cbbb4;}
+.tooltip-content-flip .tooltip-front::after, .tooltip-content-flip .tooltip-back::after {
+	border-top: 10px solid #1cbbb4;
+}
+
+.banner h4{color:#1cbbb4;}
+.banner.colored{background:#1cbbb4 url(../../img/banner_bg_colored.png) no-repeat center bottom;}
+
+/* Menu */
+/*First level styles */					
+.main-menu > ul > li:hover > a {color: #1cbbb4;}
+.main-menu ul ul:before{border-bottom-color: #1cbbb4;}
+
+/* Submenu */
+.main-menu ul ul,
+.main-menu ul li .menu-wrapper {border-top: 2px solid #1cbbb4;}
+.main-menu ul ul li:hover > a {color:#1cbbb4;}
+
+.search-overlay-menu .search-overlay-close:hover, .search-overlay-menu form button:hover {
+	color: #1cbbb4;
+}
+
+@media only screen and (max-width: 991px) {
+/* Menu */
+.main-menu ul li a:hover,
+a.show-submenu:hover,
+a.show-submenu:focus,
+a.show-submenu-mega:hover,
+a.show-submenu-mega:focus{color:#1cbbb4 !important;}	
+
+.main-menu ul ul,
+.main-menu ul .menu-wrapper {border-top: none;}
+}
+
+@media only screen and (min-width: 992px) {
+.main-menu ul ul, .main-menu ul li .menu-wrapper {border-top: 2px solid #1cbbb4;}
+}
+/*-------- Date dropper/Time dropper --------*/
+div.datedropper.primary:before,
+div.datedropper.primary .pick-submit,
+div.datedropper.primary .pick-lg-b .pick-sl:before,
+div.datedropper.primary .pick-m,
+div.datedropper.primary .pick-lg-h {
+  background-color: #1cbbb4 !important;
+}
+div.datedropper.primary .pick-y.pick-jump,
+div.datedropper.primary .pick li span,
+div.datedropper.primary .pick-lg-b .pick-wke,
+div.datedropper.primary .pick-btn {
+  color: #1cbbb4;
+}
+
+#td-clock-0 .td-clock .td-time span.on {
+    color: #1cbbb4!important;
+}
+#td-clock-0 .td-lancette {
+    color: #1cbbb4!important;
+	border: 2px solid #1cbbb4!important;
+}
+#td-clock-0 .td-clock {
+    box-shadow: 0 0 0 1px #1cbbb4, 0 0 0 8px rgba(0, 0, 0, 0.05)!important;
+}
+#td-clock-0 .td-clock:before {
+    border-color: #1cbbb4!important;
+}
+
+.td-select svg{
+    stroke: #1cbbb4!important;
+}
+
+#td-clock-0 .td-lancette div:after {
+    background: #1cbbb4!important;
+}
+
+#td-clock-0 .td-select:after {
+    box-shadow: 0 0 0 1px #1cbbb4!important;
+}
+
+/*-------- Map --------*/
+.btn_infobox_get_directions, a.btn_infobox_phone{color:#1cbbb4;}
+a.btn_infobox, .btn_infobox{background-color: #1cbbb4;}
+.view_on_map:before {color: #1cbbb4;}
+
+#map_filter ul li a:hover,
+#map_filter ul li a.active {color: #1cbbb4;}
+
+/*-------- Shop --------*/
+.shop-item .image-box .item-options .btn_shop:hover{
+	background:#1cbbb4!important;
+}
+.prod-tabs .tab-btns .tab-btn.active-btn {
+    color: #1cbbb4!important;;
+}
+.btn_cart_outine:hover{
+	background:#1cbbb4;
+	border:2px solid #1cbbb4;
+}
+
+.card-header a .indicator {
+    color: #1cbbb4;
+}

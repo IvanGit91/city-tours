@@ -1,0 +1,17 @@
+<div class="mat-dialog-title d-flex nomargin" mat-dialog-title>
+  <mat-icon color="warn">add_alert</mat-icon>
+  <h1 class="position-relative ml-1 mb-2" style="top: -3px;">{{ data.title | translate }}</h1>
+</div>
+<div class="mat-dialog-content" mat-dialog-content>{{ data.body | translate }}</div>
+<div class="mat-dialog-actions d-block" mat-dialog-actions>
+  <div class="d-flex justify-content-between">
+    <button (click)="confirm()" class="mat-button mat-dialog-close" mat-button mat-dialog-close>
+      <mat-icon>check</mat-icon>
+      {{ 'LABELS.YES' | translate }}
+    </button>
+    <button (click)="close()" class="mat-button mat-dialog-close" mat-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+      {{ 'LABELS.NO' | translate }}
+    </button>
+  </div>
+</div>

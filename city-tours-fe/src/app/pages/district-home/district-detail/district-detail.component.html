@@ -1,0 +1,77 @@
+<div class="container">
+  <app-title2 [t_array]="true" [t_go_back]="true" [t_title]="['OPERATIONS.DETAIL', 'MODELS.DISTRICTS']"
+              t_icon="store_mall_directory"></app-title2>
+  <mat-card *ngIf="district | async as e" class="dist-card mb-5 ml-auto mr-auto">
+    <mat-card-header>
+      <!--<div mat-card-avatar class="dist-header-image" style="background-image: url({{e.image !== null ? utils.file.toBase64Image(e.image) : '/assets/img/tour_box_1.jpg'}})"></div>-->
+      <mat-card-title>{{ 'MODELS.DENOMINATION' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ e.denomination }}</mat-card-subtitle>
+      <div class="mat-card-header-text">
+        <div class="mat-card-title">
+          {{ 'MODELS.EMAIL' | translate }}
+        </div>
+        <div class="mat-card-subtitle">
+          {{ e.email }}
+        </div>
+      </div>
+      <div class="mat-card-header-text">
+        <div class="mat-card-title">
+          {{ 'MODELS.PHONE' | translate }}
+        </div>
+        <div class="mat-card-subtitle">
+          {{ utils.phone.concatenate(e.phone) }}
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <div class="image-detail">
+            <img alt="no image"
+                 src="{{e.image !== null ? utils.file.toBase64Image(e.image) : 'assets/img/tour_box_1.jpg'}}">
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <div class="image-detail">
+            <img alt="no image"
+                 src="{{e.logo !== null ? utils.file.toBase64Image(e.logo) : 'assets/img/tour_box_1.jpg'}}">
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between mt-3">
+        <div class="mat-card-header-text">
+          <div class="mat-card-title">
+            {{ 'MODELS.ADDRESS' | translate }}
+          </div>
+          <div class="mat-card-subtitle">
+            {{ e.address }}
+          </div>
+        </div>
+        <div class="mat-card-header-text">
+          <div class="mat-card-title">
+            {{ 'MODELS.WEBSITE' | translate }}
+          </div>
+          <div class="mat-card-subtitle">
+            <app-dist-href [t_href]="e.webSite"></app-dist-href>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="mat-card-header-text">
+            <div class="mat-card-title">
+              {{ 'MODELS.DESCRIPTION' | translate }}
+            </div>
+            <div class="mat-card-subtitle">
+              {{ currentLang === 'it' ? e.description : e.descriptionEng }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

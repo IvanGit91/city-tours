@@ -1,0 +1,70 @@
+<div class="container">
+  <app-title2 [t_go_back]="true" t_icon="add" t_title="{{'TITLE.MOD_USERS'}}"></app-title2>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="user">
+    <input formControlName="id" id="id" name="id" type="hidden">
+    <div class="mb-3">
+      <div class="row">
+        <div class="col-4 offset-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nome</mat-label>
+            <input [formControl]="userForm.name" formControlName="name" id="name" matInput name="name" placeholder="Inserisci il nome"
+                   type="text">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 offset-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Email</mat-label>
+            <input [formControl]="userForm.email" formControlName="email" id="email" matInput name="email" placeholder="Inserisci la mail"
+                   type="email">
+            <mat-error *ngIf="userForm.email.hasError('required')">
+              <sup>*</sup>{{ 'LABELS.MANDATORY_FIELD' | translate }}
+            </mat-error>
+            <mat-error *ngIf="userForm.email.hasError('userNameExists')">
+              <sup>*</sup>{{ 'VALIDATION_MSG.USER_EXISTS' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="offset-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-4 offset-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>{{ 'LABELS.PHONE' | translate }}</mat-label>
+            <input [formControl]="userForm.phone" formControlName="phone" id="phone" matInput name="phone"
+                   placeholder="Inserisci il telefono" type="text">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 offset-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>{{ 'LABELS.ADDRESS' | translate }}</mat-label>
+            <input [formControl]="userForm.address" formControlName="address" id="address" matInput name="address"
+                   placeholder="Inserisci indirizzo" type="text">
+          </mat-form-field>
+        </div>
+      </div>
+      <div *ngIf="singleUser | async as s" class="row">
+        <div *ngIf="s.role.id === 1" class="col-4 offset-4">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-select [compareWith]="compareFunction" formControlName="role" id="role" name="role"
+                        placeholder="{{selectedValue}}">
+              <mat-option *ngFor="let item of roleList | async" [value]="item">
+                {{ item.id }} - {{ item.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button [disabled]="!user.valid" class="btn-block" color="primary" mat-button type="submit">
+        <mat-icon>add</mat-icon>
+        {{ 'LABELS.MODIFY' | translate }}
+      </button>
+    </div>
+  </form>
+</div>

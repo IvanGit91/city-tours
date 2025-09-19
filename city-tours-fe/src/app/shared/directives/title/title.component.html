@@ -1,0 +1,11 @@
+<div class="section-title mt-5 pb-3">
+  <h2>
+    <fa-icon [icon]="[t_ic, t_icon]"></fa-icon>
+    {{ t_title | translate }}
+  </h2>
+  <div [class]="t_back_color_class" class="section-subtitle">
+    <i [class]="t_icon" class="far"></i>
+    {{ t_title | translate }}
+  </div>
+  <span *ngIf="!t_hide_border" class="section-separator"></span>
+</div>

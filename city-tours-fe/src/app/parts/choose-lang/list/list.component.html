@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill" class="w-50">
+  <fa-icon [icon]="['fas','globe']" class="mr-2"></fa-icon>
+  <mat-select [(ngModel)]="selectedValue" [(value)]="currentLang" name="lang">
+    <mat-option (onSelectionChange)="selectLanguage(item, $event);" *ngFor="let item of supportedLanguages"
+                [value]="item">
+      {{ item | uppercase | translate }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,11 @@
+<form (ngSubmit)="search()" [formGroup]="searchForm">
+  <mat-form-field appearance="fill">
+    <input formControlName="searchValue" id="confirmSearch"
+           matInput name="confirmSearch"
+           placeholder="{{'TITLE.SEARCH_BAR' | translate}}?"
+           type="text">
+  </mat-form-field>
+  <button mat-icon-button matSuffix type="submit">
+    <mat-icon>search</mat-icon>
+  </button>
+</form>

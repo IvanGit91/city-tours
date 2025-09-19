@@ -1,0 +1,13 @@
+img.ng-lazyloaded {
+  animation: fadein .5s;
+
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

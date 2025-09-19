@@ -1,0 +1,87 @@
+<div class="mat-dialog-title small-dialog-header d-flex justify-content-between align-items-center" mat-dialog-title>
+  <h3 class="position-relative" style="bottom: -7px;">{{ 'WELCOME' | translate }}</h3>
+  <button (click)="closeDialog()" class="mat-button mat-dialog-close" mat-button mat-dialog-close>
+    <fa-icon [icon]="['fas','times']"></fa-icon>
+  </button>
+</div>
+<div style="padding-left: 24px; padding-right: 24px;">
+  <mat-dialog-content class="mat-typography">
+    <div class="custom-form">
+      <mat-card *ngIf="isInvalid || isLogout" @myInsertRemoveTrigger class="card-error mb-4">
+        <div *ngIf="isInvalid">
+          {{ 'VALIDATION_MSG.NOT_AUTHORIZED' | translate }}
+        </div>
+      </mat-card>
+      <form (ngSubmit)="onSubmit()" [formGroup]="login" name="registerform">
+        <div class="sign-in-wrapper mt-2">
+          <mat-form-field appearance="outline" class="mb-3">
+            <mat-label>Email</mat-label>
+            <input autocomplete="username" formControlName="username" id="username" matInput
+                   name="username" placeholder="{{'LABELS.INSERT_FIELD' | translate}}" required
+                   type="text">
+            <mat-icon class="position-relative" matSuffix style="left: -5px;">account_box</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="mb-3">
+            <mat-label>Password</mat-label>
+            <input [type]="hide ? 'password' : 'text'" autocomplete="password" formControlName="password" id="password" matInput
+                   name="password" placeholder="{{'LABELS.INSERT_FIELD' | translate}}"
+                   required>
+            <button (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" mat-icon-button matSuffix
+                    type="button">
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </mat-form-field>
+          <div class="text-center">
+            <mat-checkbox formControlName="rememberme" id="remember_me" name="remember-me">{{ 'REMEMBERME' | translate }}</mat-checkbox>
+            <ng-template #tipContent>
+              <mat-card class="forgot-psw-container pt-0 pb-0" style="width: 265px;">
+                <mat-card-header class="d-block">
+                  <button (click)="forgotTooltip.close()" class="mat-button" mat-button type="button">
+                    <fa-icon [icon]="['fas','times']"></fa-icon>
+                  </button>
+                </mat-card-header>
+                <mat-card-content>
+                  <mat-form-field appearance="outline" class="mb-2">
+                    <mat-label>Email</mat-label>
+                    <input [formControl]="email" autocomplete="email" id="email" matInput name="email" placeholder="{{'LABELS.INSERT_FIELD' | translate}}"
+                           required type="email">
+                    <mat-icon class="position-relative" matSuffix style="left: -5px;">account_box</mat-icon>
+                  </mat-form-field>
+                  <button (click)="sendMail()" [disabled]="email.invalid" color="accent" mat-button
+                          type="button">{{ 'LABELS.FORGOT_PSW_SEND_MAIL' | translate }}
+                  </button>
+                </mat-card-content>
+              </mat-card>
+            </ng-template>
+            <button #forgotTooltip="ngbTooltip" (click)="forgotTooltip.open()" [autoClose]="false" [ngbTooltip]="tipContent"
+                    class="d-block ml-auto mr-auto mb-3" color="accent" mat-button tooltipClass="login-forgot-tooltip"
+                    triggers="manual" type="button"> {{ 'FORGOT_PASSWORD' | translate }}
+            </button>
+            <button [disabled]="login.invalid" class="btn_login mb-4" mat-button
+                    type="submit">{{ 'LABELS.LOGIN' | translate }}
+            </button>
+          </div>
+
+          <strong>Sample Users</strong>
+          <table id="sampleLoginTable" style="width: 100%;">
+            <tr>
+              <td><a (click)="fillLoginFields('admin@email.com','123')" color="primary"
+                     href="javascript:void(0)"
+                     mat-button>Admin</a></td>
+              <td><a (click)="fillLoginFields('redactor@email.com','123')" color="primary"
+                     href="javascript:void(0)"
+                     mat-button>Redactor</a></td>
+              <td><a (click)="fillLoginFields('system@admin.com','123')" color="primary"
+                     href="javascript:void(0)"
+                     mat-button>System</a></td>
+            </tr>
+          </table>
+
+        </div>
+      </form>
+
+
+    </div>
+  </mat-dialog-content>
+</div>

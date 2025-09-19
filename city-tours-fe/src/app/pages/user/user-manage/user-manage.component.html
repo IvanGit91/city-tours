@@ -1,0 +1,106 @@
+<div class="text-center">
+  <app-title2 t_icon="format_list_bulleted" t_title="TITLE.GES_USERS"></app-title2>
+</div>
+
+<div class="col mb-5">
+  <div class="d-table m-auto">
+    <div class="d-flex justify-content-between">
+      <button [routerLink]="'/user-op/-1'" class="pl-0" mat-button>
+        <mat-icon>add</mat-icon>
+        {{ 'TITLE.ADD_USERS' | translate }}
+      </button>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'LABELS.FILTER_ALL' | translate }}</mat-label>
+        <input (keyup)="applyFilter($event)" matInput>
+      </mat-form-field>
+    </div>
+    <table [dataSource]="dataSourceFilter" class="mat-elevation-z8 dist-table" mat-table matSort matSortActive="created"
+           matSortDirection="desc" matSortDisableClear>
+      <!-- Position Column -->
+      <ng-container *ngIf="displayedColumnsFilter[0]; let hName" matColumnDef="{{hName}}">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>
+          <mat-form-field (click)="onEvent($event)" class="w-50">
+            <input (keyup)="applyFilterSingleGeneric($event, hName)" matInput
+                   placeholder="{{hName | uppercaseAddTextPipe:'MODELS' | translate}}">
+          </mat-form-field>
+        </th>
+        <td *matCellDef="let element" mat-cell> {{ element[hName] }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container *ngIf="displayedColumnsFilter[1]; let hName" matColumnDef="{{hName}}">
+        <th *matHeaderCellDef mat-header-cell>
+          <mat-form-field (click)="onEvent($event)" class="w-75">
+            <input (keyup)="applyFilterSingleGeneric($event, hName)" matInput
+                   placeholder="{{hName | uppercaseAddTextPipe:'MODELS' | translate}}">
+          </mat-form-field>
+        </th>
+        <td *matCellDef="let element" mat-cell> {{ element[hName] }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container *ngIf="displayedColumnsFilter[2]; let hName" matColumnDef="{{hName}}">
+        <th *matHeaderCellDef mat-header-cell>
+          <mat-form-field (click)="onEvent($event)" class="w-75">
+            <input (keyup)="applyFilterSingleGeneric($event, hName)" matInput
+                   placeholder="{{hName | uppercaseAddTextPipe:'MODELS' | translate}}">
+          </mat-form-field>
+        </th>
+        <td *matCellDef="let element" mat-cell> {{ element[hName] }}</td>
+      </ng-container>
+
+      <ng-container *ngIf="displayedColumnsFilter[3]; let hName" matColumnDef="{{hName}}">
+        <th *matHeaderCellDef mat-header-cell>
+          <mat-form-field (click)="onEvent($event)" class="w-75">
+            <input (keyup)="applyFilterSingleGeneric($event, hName)" matInput
+                   placeholder="{{hName | uppercaseAddTextPipe:'MODELS' | translate}}">
+          </mat-form-field>
+        </th>
+        <td *matCellDef="let element" mat-cell> {{ element[hName] }}</td>
+      </ng-container>
+
+      <ng-container *ngIf="displayedColumnsFilter[4]; let hName" matColumnDef="{{hName}}">
+        <th *matHeaderCellDef mat-header-cell>
+          <mat-form-field (click)="onEvent($event)" class="w-75">
+            <input (keyup)="applyFilterSingleGeneric($event, hName)" matInput
+                   placeholder="{{hName | uppercaseAddTextPipe:'MODELS' | translate}}">
+          </mat-form-field>
+        </th>
+        <td *matCellDef="let element" mat-cell> {{ element[hName] }}</td>
+      </ng-container>
+
+      <ng-container *ngIf="displayedColumnsFilter[5]; let hName" matColumnDef="{{hName}}">
+        <th *matHeaderCellDef mat-header-cell>
+          <mat-form-field (click)="onEvent($event)" class="w-75">
+            <input (keyup)="applyFilterSingleGeneric($event, hName)" matInput
+                   placeholder="{{hName | uppercaseAddTextPipe:'MODELS' | translate}}">
+          </mat-form-field>
+        </th>
+        <td *matCellDef="let element" mat-cell> {{ element[hName].name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="{{displayedColumnsFilter[6]}}">
+        <th *matHeaderCellDef mat-header-cell> {{ 'MODELS.OPERATION' | translate }}</th>
+        <td *matCellDef="let element" mat-cell>
+          <button class="dist-button-icon mr-2" color="primary" mat-mini-fab matTooltip="Modifica"
+                  matTooltipPosition="above" routerLink="/user-op/{{element.id}}">
+            <mat-icon>create</mat-icon>
+          </button>
+          <button (click)="onRemove(element.id)" class="dist-button-icon" color="primary" mat-mini-fab matTooltip="Elimina"
+                  matTooltipPosition="above">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumnsFilter" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumnsFilter;" mat-row></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr *matNoDataRow class="mat-row">
+        <td class="mat-cell" colspan="4">{{ 'LABELS.NO_TABLE_DATA' | translate }}</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+  </div>
+</div>

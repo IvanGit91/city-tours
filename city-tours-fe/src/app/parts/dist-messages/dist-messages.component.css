@@ -1,0 +1,7 @@
+.snackbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 20px;
+  opacity: 1;
+}

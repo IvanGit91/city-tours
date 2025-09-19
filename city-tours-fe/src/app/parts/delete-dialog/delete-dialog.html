@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{ 'MESSAGE.CONFIRM_DELETE_TITLE' | translate }}</h1>
+<div mat-dialog-content>
+  <p>{{ 'MESSAGE.CONFIRM_DELETE' | translate }}</p>
+</div>
+<div mat-dialog-actions>
+  <button (click)="deleteNews()" class="confirm" mat-button>{{ 'CONFIRM' | translate }}</button>
+  <button (click)="closeModal()" mat-button>{{ 'LABELS.CLOSE' | translate }}</button>
+</div>

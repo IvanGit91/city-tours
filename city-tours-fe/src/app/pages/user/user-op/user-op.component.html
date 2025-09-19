@@ -1,0 +1,74 @@
+<div class="container">
+  <app-title2 [t_go_back]="true" t_icon="add" t_title="{{isEdit ? 'TITLE.MOD_USERS' : 'TITLE.ADD_USERS'}}"></app-title2>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="user">
+    <input formControlName="id" id="id" name="id" type="hidden">
+    <div class="col-md-12 offset-md-4">
+      <div class="col-sm-4 overflow-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'LABELS.NAME' | translate }}</mat-label>
+          <input [formControl]="userForm.name" formControlName="name" id="name" matInput name="name"
+                 placeholder="{{'PLACEHOLDER.INSERT_NAME' | translate}}" type="text">
+          <mat-error *ngIf="userForm.name.hasError('required')">
+            <sup>*</sup>{{ "VALIDATION_MSG.REQUIRED"| translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4 overflow-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'LABELS.EMAIL' | translate }}</mat-label>
+          <input [formControl]="userForm.email" formControlName="email" id="email" matInput name="email"
+                 placeholder="{{'PLACEHOLDER.INSERT_EMAIL' | translate}}" type="email">
+          <mat-error *ngIf="userForm.email.hasError('required')">
+            <sup>*</sup>{{ 'LABELS.MANDATORY_FIELD' | translate }}
+          </mat-error>
+          <mat-error *ngIf="userForm.email.hasError('email')">
+            <sup>*</sup>{{ "VALIDATION_MSG.EMAIL_NOT_VALID"| translate }}
+          </mat-error>
+          <mat-error *ngIf="userForm.email.hasError('userNameExists')">
+            <sup>*</sup>{{ 'VALIDATION_MSG.USER_EXISTS' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="offset-2"></div>
+      <div class="col-sm-4 overflow-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'LABELS.PHONE' | translate }}</mat-label>
+          <input [formControl]="userForm.phone" formControlName="phone" id="phone" matInput name="phone"
+                 placeholder="{{'PLACEHOLDER.INSERT_PHONE' | translate}}" type="text">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4 overflow-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'LABELS.ADDRESS' | translate }}</mat-label>
+          <input [formControl]="userForm.address" formControlName="address" id="address" matInput
+                 name="address" placeholder="{{'PLACEHOLDER.INSERT_ADDRESS' | translate}}"
+                 type="text">
+          <mat-error *ngIf="userForm.address.hasError('required')">
+            <sup>*</sup>{{ 'LABELS.MANDATORY_FIELD' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4 overflow-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label *ngIf="!isEdit">{{ 'LABELS.ROLE' | translate }}</mat-label>
+          <mat-select [compareWith]="compareFunction" formControlName="role" id="role" name="role"
+                      placeholder="{{selectedValue}}">
+            <mat-option *ngFor="let item of roleList | async" [value]="item">
+              {{ item.id }} - {{ item.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="userForm.role.hasError('required')">
+            <sup>*</sup>{{ 'LABELS.MANDATORY_FIELD' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-group">
+      <button [disabled]="!user.valid" class="btn-block" color="primary" mat-button type="submit">
+        <mat-icon>add</mat-icon>
+        {{ (isEdit ? 'BUTTONS.EDIT' : 'BUTTONS.INSERT') | translate }}
+      </button>
+    </div>
+  </form>
+</div>

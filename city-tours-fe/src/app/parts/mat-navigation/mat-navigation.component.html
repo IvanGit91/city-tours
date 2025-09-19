@@ -1,0 +1,147 @@
+<!--Template used both from the navbar and the sidebar-->
+<ng-template #navTemplate let-currentUser>
+  <button (click)="sidenav.close()" color="primary" mat-button routerLink="/home">Home</button>
+  <button (click)="sidenav.close()" *ngIf="currentUser && currentUser.role === 'ROLE_ADMINISTRATOR'" color="primary"
+          mat-button
+          routerLink="/user-management">{{ 'LABELS.USERS'  | translate }}
+  </button>
+
+  <button [matMenuTriggerFor]="loggeduser" color="primary" mat-button>{{ 'LABELS.NEWS' | translate }}</button>
+  <mat-menu #loggeduser="matMenu">
+    <button (click)="sidenav.close()" *ngIf="currentUser" class="nav-item nav-link" mat-menu-item
+            routerLink="/news-management">
+      <mat-icon>book</mat-icon>
+      {{ 'LABELS.MANAGE_NEWS'  | translate }}
+    </button>
+    <button (click)="sidenav.close()" class="nav-item nav-link" mat-menu-item routerLink="/news-list">
+      <mat-icon>archive</mat-icon>
+      {{ 'LABELS.ALL_NEWS'  | translate }}
+    </button>
+  </mat-menu>
+
+  <ng-container *ngIf="currentUser">
+    <button [matMenuTriggerFor]="district" color="primary" mat-button>{{ 'MODELS.DISTRICT' | translate }}</button>
+    <mat-menu #district="matMenu">
+      <button (click)="sidenav.close()" class="nav-item nav-link" mat-menu-item routerLink="/district-home">
+        <mat-icon>location_city</mat-icon>
+        {{ 'MODELS.DISTRICT' | translate }}
+      </button>
+      <button (click)="sidenav.close()" class="nav-item nav-link" mat-menu-item routerLink="/poi-home">
+        <mat-icon> place</mat-icon>
+        {{ 'MODELS.POI' | translate }}
+      </button>
+    </mat-menu>
+  </ng-container>
+  <button (click)="sidenav.close()" color="primary" mat-button
+          routerLink="/project">{{ 'LABELS.PROJECT' | translate }}
+  </button>
+  <button (click)="sidenav.close()" *ngIf="currentUser && currentUser.account === 'system@admin.com'" color="primary"
+          mat-button routerLink="/deploy">Deploy
+  </button>
+</ng-template>
+
+
+<div> <!-- 👈 we're wrapping whole content in a div, to handle dark/light theme -->
+  <mat-toolbar id="plain">
+    <mat-toolbar-row id="top_line">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <ul class="top_links" style="float: left; margin-top: 8px;">
+              <li id="social_top">
+                <a href="#0"><i class="icon-facebook"></i></a><a href="#0"><i class="icon-twitter"></i></a>
+                <a href="#0"><i class="icon-google"></i></a>
+                <a href="#0"><i class="icon-instagramm"></i></a> <a href="#0"><i class="icon-vimeo"></i></a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6">
+            <ng-container *ngIf="currentUser; else noUser">
+              <ul class="top_links">
+                <li class="border-0">
+                  <button [routerLink]="'/profile'" mat-icon-button>
+                    <span class="material-icons">account_circle</span>
+                  </button>
+                </li>
+                <li class="border-0">
+                  <button (click)="logout()" [queryParams]="{logout: true}" [routerLink]="'/login'" mat-icon-button>
+                    <span class="material-icons">logout</span> Logout
+                  </button>
+                </li>
+              </ul>
+            </ng-container>
+            <ng-template #noUser>
+              <ul class="top_links">
+                <li class="border-0">
+                  <button (click)="openLoginDialog()" mat-icon-button><span class="material-icons">login</span> Login
+                  </button>
+                </li>
+              </ul>
+            </ng-template>
+
+          </div>
+        </div>
+      </div>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <div fxHide.gt-sm fxShow="true">
+        <button (click)="sidenav.toggle()" mat-button mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-3">
+            <div id="logo_home">
+              <h1><a [routerLink]="'/home'" mat-button title="City Tours">City Tours</a></h1>
+            </div>
+          </div>
+
+          <nav class="col-9 dist-nav">
+            <div fxHide.lt-md fxShow="true">
+              <div class="main-menu">
+                <div id="header_menu">
+                  <img alt="City Tours" height="34" src="assets/img/logo_sticky.png" width="160">
+                </div>
+
+                <ng-container [ngTemplateOutletContext]="{ $implicit: currentUser }" [ngTemplateOutlet]="navTemplate">
+                </ng-container>
+              </div>
+            </div>
+
+
+            <button (click)="openOverlay()" mat-icon-button>
+              <mat-icon style="position: relative; top: -6px;">search</mat-icon>
+            </button>
+
+          </nav>
+        </div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav>
+      <mat-nav-list class="sidenav">
+        <button (click)="sidenav.toggle()" color="primary" mat-button>Close</button>
+        <ng-container [ngTemplateOutletContext]="{ $implicit: currentUser }" [ngTemplateOutlet]="navTemplate">
+        </ng-container>
+
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+      <div [@routerTransition]="prepareRoute(outlet)" id="wrapper">
+        <div class="content">
+          <ngx-ui-loader></ngx-ui-loader>
+          <router-outlet #outlet="outlet"></router-outlet>
+        </div>
+      </div>
+      <app-footer></app-footer>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+
+</div>

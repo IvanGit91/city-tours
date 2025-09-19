@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="error-template">
+      <h1>Oops!</h1>
+
+      <h2>Not found!</h2>
+
+      <div class="error-details">
+        Sorry, an error happened. the specific page cannot be found!
+      </div>
+
+      <div class="error-actions">
+        <button [routerLink]="'/'" color="accent" mat-button>
+          <span class="glyphicon glyphicon-home"></span>
+          Back to home
+        </button>
+        <button [routerLink]="'.'" color="warn" mat-button>
+          Contact support
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

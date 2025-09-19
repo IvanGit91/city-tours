@@ -1,0 +1,80 @@
+<div class="container">
+  <app-title2 [t_go_back]="true" t_icon="add" t_title="Deploy"></app-title2>
+
+  <div *ngIf="showLoading" class="mb-3">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="deploy" enctype="multipart/form-data">
+
+
+    <div class="dist-img-container">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <div class="text-center">
+            Backend War File
+          </div>
+          <mat-form-field appearance="outline" class="w-100 mat-file">
+            <mat-toolbar class="d-block">
+              <!-- Display files names -->
+              <div class="text-center">
+                <input class="d-none" formControlName="backend" matInput name="backend" readonly/>
+                <div>
+                  {{ backendFileName == null ? ('LABELS.CHOOSE_FILE' | translate) : backendFileName }}
+                </div>
+
+                <!-- Browse Button -->
+                <button color="primary" mat-flat-button>
+                  {{ 'LABELS.BROWSE_FILE' | translate }}
+                </button>
+              </div>
+            </mat-toolbar>
+
+            <input #backendInput (change)="uploadFileEvt($event, true)" accept="war" name="backendFile" type="file"/>
+          </mat-form-field>
+          <div class="text-center file-delete">
+            <mat-icon (click)="removeUploadedFile(true)">delete</mat-icon>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <div class="text-center">
+            Frontend Zip File
+          </div>
+          <mat-form-field appearance="outline" class="w-100 mat-file">
+            <mat-toolbar class="d-block">
+              <!-- Display files names -->
+              <div class="text-center">
+                <input class="d-none" formControlName="frontend" matInput name="frontend" readonly/>
+                <div>
+                  {{ frontendFileName == null ? ('LABELS.CHOOSE_FILE' | translate) : frontendFileName }}
+                </div>
+
+                <!-- Browse Button -->
+                <button color="primary" mat-flat-button>
+                  {{ 'LABELS.BROWSE_FILE' | translate }}
+                </button>
+              </div>
+            </mat-toolbar>
+
+            <input #frontendInput (change)="uploadFileEvt($event, false)" accept="application/zip" name="frontendFile"
+                   type="file"/>
+          </mat-form-field>
+          <div class="text-center file-delete">
+            <mat-icon (click)="removeUploadedFile(false)">delete</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 text-center mb-3">
+        <button [disabled]="!deploy.valid" color="primary" mat-button type="submit">
+          <mat-icon>add</mat-icon>
+          Deploy
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+</div>

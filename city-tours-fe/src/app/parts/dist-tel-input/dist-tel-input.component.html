@@ -1,0 +1,30 @@
+<div (focusin)="onFocusIn($event)" (focusout)="onFocusOut($event)"
+     [attr.aria-labelledby]="_formField?.getLabelId()"
+     [formGroup]="parts"
+     class="example-tel-input-container"
+     role="group">
+  <input #area
+         (input)="_handleInput(parts.controls.area, exchange)" aria-label="Area code"
+         class="example-tel-input-element"
+         formControlName="area"
+         maxLength="3"
+         size="3">
+  <span class="example-tel-input-spacer">&ndash;</span>
+  <input #exchange
+         (input)="_handleInput(parts.controls.exchange, subscriber)"
+         (keyup.backspace)="autoFocusPrev(parts.controls.exchange, area)"
+         aria-label="Exchange code"
+         class="example-tel-input-element"
+         formControlName="exchange"
+         maxLength="3"
+         size="3">
+  <span class="example-tel-input-spacer">&ndash;</span>
+  <input #subscriber
+         (input)="_handleInput(parts.controls.subscriber)"
+         (keyup.backspace)="autoFocusPrev(parts.controls.subscriber, exchange)"
+         aria-label="Subscriber number"
+         class="example-tel-input-element"
+         formControlName="subscriber"
+         maxLength="4"
+         size="4">
+</div>

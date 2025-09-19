@@ -1,0 +1,58 @@
+<div class="container">
+  <app-title2 [t_go_back]="true" t_icon="list" t_title="TITLE.DETT_NEWS"></app-title2>
+  <mat-card class="dist-card mb-5 ml-auto mr-auto">
+    <mat-card-header>
+      <mat-card-title>{{ 'LABELS.TITLE' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ singleNews.title }}</mat-card-subtitle>
+      <div class="mat-card-header-text">
+        <div class="mat-card-title">
+          {{ 'LABELS.PUBLICATION_DATE' | translate }}
+        </div>
+        <div *ngIf="singleNews.publicationDate" class="mat-card-subtitle">
+          <span class="date"><mat-icon>event</mat-icon>
+            {{ singleNews.publicationDate[2] }}/{{ singleNews.publicationDate[1] }}/{{ singleNews.publicationDate[0] }}</span>
+        </div>
+      </div>
+      <div class="mat-card-header-text">
+        <div class="mat-card-title">
+          {{ 'LABELS.AUTHOR' | translate }}
+        </div>
+        <div class="mat-card-subtitle">
+          {{ singleNews.author }}
+        </div>
+      </div>
+    </mat-card-header>
+    <div class="row mb-md-3">
+      <div *ngIf="singleNews.pathImage" class="col-sm-12 col-md-6">
+        <div class="image-detail">
+          <img src="{{(singleNews.pathImage)}}">
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 d-flex flex-column justify-content-space-evenly mt-3 mt-sm-3">
+        <div class="mat-card-header-text">
+          <div class="mat-card-title">
+            {{ 'LABELS.DESCRIPTION' | translate }}
+          </div>
+          <div class="mat-card-subtitle">
+            {{ singleNews.description }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-12">
+          <div class="mat-card-header-text">
+            <div class="mat-card-title">
+              {{ 'LABELS.DESCRIPTION_EXTENDED' | translate }}
+            </div>
+            <div *ngIf="singleNews.descriptionExtended" [innerHTML]="currentLang == 'it' ? singleNews.descriptionExtended : singleNews.descriptionEng "
+                 class="mat-card-subtitle">
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

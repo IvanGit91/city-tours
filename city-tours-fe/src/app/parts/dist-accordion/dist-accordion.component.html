@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col">
+    <mat-accordion>
+      <mat-expansion-panel (closed)="panelOpenState = false"
+                           (opened)="panelOpenState = true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ m_title }}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ panelOpenState ? ('LABELS.CLICK_CLOSE_DETAIL' | translate) : ('LABELS.CLICK_OPEN_DETAIL' | translate) }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngFor="let item of m_elems">
+          <p>- {{ item }}</p>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

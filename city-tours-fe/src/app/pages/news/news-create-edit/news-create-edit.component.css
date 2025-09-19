@@ -1,0 +1,16 @@
+img {
+  margin-top: 10px;
+  max-width: 250px !important;
+  max-height: 250px !important;
+}
+
+#uploadFile {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 9;
+  opacity: 0;
+  height: 100%;
+  cursor: pointer;
+  position: absolute;
+}

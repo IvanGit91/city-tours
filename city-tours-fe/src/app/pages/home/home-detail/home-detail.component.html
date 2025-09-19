@@ -1,0 +1,66 @@
+<div class="container-fluid full-height">
+  <div *ngIf="district | async as d" class="row mt-3 mb-3">
+    <div class="col-12 text-center">
+      <app-title2 [t_array]="true" [t_no_margin]="true" [t_title]="['MODELS.DISTRICTS', ' - ', d.denomination]"
+                  t_icon="format_list_bulleted"></app-title2>
+      <div>
+        <mat-icon>navigate_next_icon</mat-icon>
+        <a [routerLink]="['/district-detail', d.id]" class="position-relative"
+           style="top: -7px;">{{ 'LABELS.GO_TO' | translate }} {{ 'OPERATIONS.DETAIL' | translate }}</a>
+      </div>
+    </div>
+  </div>
+  <div class="row row-height">
+    <div class="col-lg-5 content-left">
+
+      <div class="row mb-3">
+        <div class="col-sm-12">
+          <div id="map_filter" style="position: static">
+            <ul>
+              <li>
+                <a (click)="markersFilter(null)"><i
+                  [class]="iconForPoiType(null)"></i><span>{{ 'LABELS.ALL' | translate }}</span></a>
+              </li>
+              <li *ngFor="let t of poiType | async">
+                <a (click)="markersFilter(t.key)"><i
+                  [class]="iconForPoiType(t.key)"></i><span>{{ t.description }}</span></a>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngFor="let p of pois | async" class="col-sm-4">
+          <div *ngIf="paginating" @myInsertRemoveTrigger class="tour_container">
+
+            <div class="img_container">
+              <a (click)="openDialogFromPoiElement(p)">
+                <img [src]="p.image !== null ? utils.file.toBase64Image(p.image) : 'assets/img/tour_box_1.jpg'"
+                     alt="Image" class="img-fluid dist-image-fluid" height="533" width="800">
+              </a>
+            </div>
+            <div class="tour_title">
+              <h3><strong>{{ p.denomination }}</strong></h3>
+              <div (click)="centerOnMap(p)" class="view_on_map">{{ 'LABELS.VIEW_ON_MAP' | translate }}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <hr>
+
+      <mat-paginator #paginator (page)="handlePage($event)" [length]="totalSize" [pageIndex]="currentPage"
+                     [pageSizeOptions]="[6, 12, 18]"
+                     [pageSize]="pageSize" [showFirstLastButtons]="true"></mat-paginator>
+
+    </div>
+
+    <div class="col-lg-7 map-right">
+      <div class="map" id="map-detail"
+           style="border-bottom:none; height:calc(100vh - 100px); width:100%; position: static"></div>
+    </div>
+
+  </div>
+</div>

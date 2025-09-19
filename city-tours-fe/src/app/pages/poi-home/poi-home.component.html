@@ -1,0 +1,67 @@
+<div class="text-center">
+  <app-title2 [t_array]="true" [t_title]="['OPERATIONS.MANAGE', 'MODELS.POI']" t_icon="format_list_bulleted"></app-title2>
+</div>
+
+<div class="col mb-5">
+  <div class="d-table m-auto pl-4 pr-4">
+    <div class="d-flex justify-content-between">
+      <button [routerLink]="'/poi-op/-1'" class="pl-0" mat-button>
+        <mat-icon>add</mat-icon>
+        {{ 'OPERATIONS.ADD' | translate }} {{ 'MODELS.POI' | translate }}
+      </button>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'LABELS.FILTER_ALL' | translate }}</mat-label>
+        <input (keyup)="applyFilter($event)" matInput placeholder="Ex: Napoli">
+      </mat-form-field>
+    </div>
+    <table [dataSource]="dataSourceFilter" class="mat-elevation-z8 dist-table" mat-table matSort matSortActive="created"
+           matSortDirection="desc" matSortDisableClear>
+      <ng-container *ngFor="let e of repeatedColumnsFilter">
+        <ng-container *ngIf="e; let hName" matColumnDef="{{hName}}">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>
+            <mat-form-field (click)="onEvent($event)" class="w-75">
+              <input (keyup)="applyFilterSingleGeneric($event, hName)" matInput
+                     placeholder="{{hName | uppercaseAddTextPipe:'MODELS' | translate}}">
+            </mat-form-field>
+          </th>
+          <td *matCellDef="let element" [ngSwitch]="hName" mat-cell>
+            <span *ngSwitchCase="'phone'"> {{ utils.phone.concatenate(element[hName]) }} </span>
+            <span *ngSwitchCase="'approvalDate'"> {{ element[hName] | formatDataPipe }} </span>
+            <span *ngSwitchCase="'description'"> {{ element[hName] | cutText }}</span>
+            <span *ngSwitchCase="'redactor'"> {{ element[hName] !== null ? element[hName].name : null }}</span>
+            <span *ngSwitchDefault> {{ element[hName] }} </span>
+          </td>
+        </ng-container>
+      </ng-container>
+
+      <ng-container matColumnDef="operation">
+        <th *matHeaderCellDef mat-header-cell style="width: 140px"> {{ 'MODELS.OPERATION' | translate }}</th>
+        <td *matCellDef="let element" mat-cell>
+          <button class="dist-button-icon mr-2" color="primary" mat-mini-fab matTooltip="Modifica"
+                  matTooltipPosition="above" routerLink="/poi-op/{{element.id}}">
+            <mat-icon>create</mat-icon>
+          </button>
+          <button (click)="onRemove(element.id)" *ngIf="element.approvalDate === null || user.role === role.Administrator"
+                  class="dist-button-icon mr-2" color="primary" mat-mini-fab matTooltip="Elimina"
+                  matTooltipPosition="above">
+            <mat-icon>clear</mat-icon>
+          </button>
+          <button (click)="approve(element.id)" *ngIf="element.approvalDate === null && user.role === role.Administrator"
+                  class="dist-button-icon" color="primary" mat-mini-fab matTooltip="Approva"
+                  matTooltipPosition="above">
+            <mat-icon>done</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumnsFilter" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumnsFilter;" mat-row></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr *matNoDataRow class="mat-row">
+        <td class="mat-cell" colspan="4">{{ 'LABELS.NO_TABLE_DATA' | translate }}</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+  </div>
+</div>

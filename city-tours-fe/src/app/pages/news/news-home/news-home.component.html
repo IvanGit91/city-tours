@@ -1,0 +1,38 @@
+<div class="container margin_60">
+  <div class="main_title">
+    <h2>{{ 'LABELS.LATEST' | translate }} <span>News</span></h2>
+  </div>
+
+  <swiper #swiperRef (slideChange)="onSlideChange($event)" [autoplay]="autoplay" [breakpoints]="breakpoints"
+          [index]="1" [loop]="true" [navigation]="navigation" [pagination]="pagination"
+          [scrollbar]="false" [slidesPerView]="3" [spaceBetween]="50" [speed]="1000"
+          class="dist-swiper">
+    <ng-template *ngFor='let item of news | async' let-data swiperSlide>
+      <div [class.active-slide]="data.isActive" [class.bg-blue]="data.isPrev" [class.bg-yellow]="data.isNext"
+           class="transition">
+        <div>
+          <a [routerLink]="['/news-detail', item.id]" class="box_news">
+            <div *ngIf="item.pathImage; else elseBlock">
+              <figure>
+                <img src="{{(item.pathImage)}}">
+                <figcaption>
+                  <strong>{{ item.publicationDate | date: 'dd' }}</strong>{{ monthNames[item.publicationDate| date: 'M'] }}
+                </figcaption>
+              </figure>
+            </div>
+            <ng-template #elseBlock>
+              <figure><img src="./assets/img/news_home_1.jpg">
+                <figcaption>
+                  <strong>{{ item.publicationDate | date: 'dd' }}</strong>{{ monthNames[item.publicationDate| date: 'M'] }}
+                </figcaption>
+              </figure>
+            </ng-template>
+          </a>
+          <h4>{{ item.title }}</h4>
+          <p>{{ item.description }}</p>
+        </div>
+      </div>
+    </ng-template>
+  </swiper>
+
+</div>

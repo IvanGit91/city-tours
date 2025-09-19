@@ -1,0 +1,119 @@
+<div class="container">
+
+  <app-title2 [t_array]="true"
+              [t_go_back]="true"
+              [t_title]="!isCreate ? ['OPERATIONS.MODIFY', 'MODELS.NEWS'] : ['OPERATIONS.ADD', 'MODELS.NEWS']" t_icon="add"></app-title2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="newsForm">
+    <input formControlName="id" id="id" name="id" type="hidden">
+    <div class="col-md-12 offset-md-3">
+      <div class="col-sm-6 overflow-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'LABELS.TITLE' | translate }}</mat-label>
+          <input [formControl]="f.title" formControlName="title" id="title" matInput name="title"
+                 placeholder="{{'LABELS.INSERT_FIELD' | translate}}" type="title">
+          <mat-error *ngIf="f.title.hasError('required')">
+            <sup>*</sup>{{ "VALIDATION_MSG.REQUIRED"| translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 overflow-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'LABELS.AUTHOR' | translate }}</mat-label>
+          <input [formControl]="f.author" formControlName="author" id="author" matInput name="author"
+                 placeholder="{{'LABELS.INSERT_FIELD' | translate}}" type="author">
+          <mat-error *ngIf="f.author.hasError('required')">
+            <sup>*</sup>{{ "VALIDATION_MSG.REQUIRED"| translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 overflow-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'LABELS.DESCRIPTION' | translate }}</mat-label>
+          <input [formControl]="f.description" formControlName="description" id="description" matInput
+                 name="description" placeholder="{{'LABELS.INSERT_FIELD' | translate}}"
+                 type="description">
+          <mat-error *ngIf="f.description.hasError('required')">
+            <sup>*</sup>{{ "VALIDATION_MSG.REQUIRED"| translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 overflow-3">
+        <label for="descriptionExtended">{{ 'LABELS.DESCRIPTION_EXTENDED' | translate }}</label>
+        <app-rich-text-editor (dataChange)="onDescriptionExtendedChange($event)" [data]="f.descriptionExtended.value"
+                              id="descriptionExtended"></app-rich-text-editor>
+      </div>
+      <div class="col-sm-6 overflow-3" style="margin-top: 10px;">
+        <label for="descriptionEng">{{ 'LABELS.DESCRIPTION_ENG' | translate }}</label>
+        <app-rich-text-editor (dataChange)="onDescriptionEngChange($event)" [data]="f.descriptionEng.value"
+                              id="descriptionEng"></app-rich-text-editor>
+      </div>
+
+      <div class="col-sm-6 overflow-3">
+        <div class="dist-img-container">
+          <div class="text-center">
+            {{ 'LABELS.IMAGE' | translate }}
+          </div>
+          <mat-form-field appearance="outline" class="w-100 mat-file">
+            <mat-toolbar class="d-block">
+              <!-- Display files names -->
+              <div class="text-center">
+                <input class="d-none" matInput name="name" readonly/>
+                <div>
+                  {{ fileAttr == null ? ('LABELS.CHOOSE_FILE' | translate) : fileAttr }}
+                </div>
+
+                <!-- Browse Button -->
+                <button color="primary" mat-flat-button>
+                  {{ 'LABELS.BROWSE_FILE' | translate }}
+                </button>
+              </div>
+            </mat-toolbar>
+
+            <input #fileInput (change)="uploadFileEvt($event)" accept="image/*" name="imageFile" type="file"/>
+          </mat-form-field>
+          <mat-card *ngIf="imageError" @myInsertRemoveTrigger class="card-error mb-2">
+            {{ imageCheck.message | translate : {max: imageCheck.messageMax} }}
+          </mat-card>
+
+          <mat-divider></mat-divider>
+
+          <div *ngIf="fileAttr !== null && showImage" class="preview-container d-inline-block">
+            <span class="mr-1">{{ "LABELS.FILE_UPLOADED" | translate }}</span>
+            <figure>
+              <img [src]="domSanitizer.bypassSecurityTrustUrl(localImage)">
+            </figure>
+            <span class="file-delete">
+                    <mat-icon (click)="removeUploadedFile()" style="margin-left: 9px;">delete</mat-icon>
+                  </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form">
+        <div class="col-sm-6 overflow-3">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>{{ "LABELS.PUBLICATION_DATE"| translate }}</mat-label>
+            <input (dateChange)="changeDateEvent('change', $event)" [formControl]="f.publicationDate" [matDatepicker]="publication" autocomplete="publicationDate"
+                   class="form-control" formControlName="publicationDate" id="publicationDate"
+                   matInput>
+            <mat-datepicker-toggle [for]="publication" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #publication></mat-datepicker>
+            <mat-error *ngIf="f.publicationDate.hasError('required')">
+              <sup>*</sup>{{ "VALIDATION_MSG.REQUIRED"| translate }}
+            </mat-error>
+            <mat-error *ngIf="f.publicationDate.hasError('dateRange')">
+              <sup>*</sup>{{ "VALIDATION_MSG.DATE_NOT_VALID"| translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button [disabled]="newsForm.invalid" class="btn-block" color="primary" mat-button type="submit">
+        <mat-icon>add</mat-icon>
+        {{ (!isCreate ? 'OPERATIONS.MODIFY' : 'OPERATIONS.ADD') | translate }}
+      </button>
+    </div>
+
+  </form>
+</div>

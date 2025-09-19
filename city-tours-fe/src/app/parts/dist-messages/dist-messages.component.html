@@ -1,0 +1,18 @@
+<div class="snackbar-container">
+  <div class="snack-data">
+    <div *ngIf="isArray; else noArray">
+      <span *ngFor="let d of data"> {{ d | translate }} </span>
+    </div>
+    <ng-template #noArray>
+      <span> {{ data | translate }} </span>
+    </ng-template>
+  </div>
+  <div class="snackbar-action">
+    <button (click)="closePopup()" class="mat-focus-indicator mat-button mat-button-base" mat-button="">
+      <span class="mat-button-wrapper">{{ 'LABELS.CLOSE' | translate }}</span>
+      <span class="mat-ripple mat-button-ripple" matripple=""></span>
+      <span class="mat-button-focus-overlay"></span>
+      <fa-icon [icon]="['fas','times']" class="ml-1"></fa-icon>
+    </button>
+  </div>
+</div>

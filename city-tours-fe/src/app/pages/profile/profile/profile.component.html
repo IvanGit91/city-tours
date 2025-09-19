@@ -1,0 +1,49 @@
+<div class="container">
+  <app-title2 [t_go_back]="true" t_icon="account_box" t_title="{{ 'TITLE.USER_PROFILE' | translate }}"></app-title2>
+  <div class="row">
+    <div class="col-4">
+      <mat-card>
+        <mat-card-title>{{ 'LABELS.INFO' | translate }}</mat-card-title>
+        <mat-list>
+          <mat-list-item>{{ 'LABELS.NAME' | translate }}: {{ currentUser.name }}</mat-list-item>
+          <mat-list-item>{{ 'LABELS.EMAIL' | translate }}: {{ currentUser.account }}</mat-list-item>
+          <mat-list-item>{{ 'LABELS.ROLE' | translate }}: {{ currentUser.role }}</mat-list-item>
+        </mat-list>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-card>
+        <mat-card-title>{{ 'LABELS.STATE' | translate }}</mat-card-title>
+        <div style="text-align: center;">
+          <mat-icon *ngIf="currentUser.verify" style="color: green;">verified_user</mat-icon>
+          <mat-icon *ngIf="!currentUser.verify" style="color: red;">gpp_bad</mat-icon>
+          <br>
+          <div *ngIf="!currentUser.verify">
+            <button [routerLink]="'/reset-psw'" color="accent" mat-flat-button>{{ 'BUTTONS.ACTIVE' | translate }}
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-card *ngIf="currentUser.verify; else elseTemplate">
+        <mat-card-title>{{ 'LABELS.MODIFY' | translate }}</mat-card-title>
+        <div style="text-align: center;">
+          <button class="mb-2" color="accent" mat-button routerLink="/redactor-edit">
+            <mat-icon>update</mat-icon>
+            {{ 'BUTTONS.EDIT_PROFILE' | translate }}
+          </button>
+          <button color="accent" mat-button routerLink="/reset-psw">
+            <mat-icon>update</mat-icon>
+            {{ 'BUTTONS.EDIT_PSW' | translate }}
+          </button>
+        </div>
+      </mat-card>
+      <ng-template #elseTemplate>
+        <mat-card>
+          <p>{{ 'VALIDATION_MSG.NOT_ACTIVE' | translate }}</p>
+        </mat-card>
+      </ng-template>
+    </div>
+  </div>
+</div>

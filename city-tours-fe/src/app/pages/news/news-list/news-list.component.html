@@ -1,0 +1,51 @@
+<div class="container">
+
+  <div class="text-center mb-2">
+    <app-title2 [t_title]="'TITLE.NEWS'" t_icon="format_list_bulleted"></app-title2>
+  </div>
+
+  <div class="row row-height">
+    <div class="col-lg-12 content-left">
+      <div class="row">
+        <div *ngFor="let p of news | async" class="col-sm-3">
+          <div *ngIf="paginating" @myInsertRemoveTrigger class="tour_container">
+
+            <div class="img_container">
+              <!-- <img src="{{(p.pathImage)}}" width="800" height="533" class="img-fluid" alt="Image"> -->
+              <a [routerLink]="['/news-detail', p.id]" class="box_news">
+                <div *ngIf="p.pathImage !== null; else elseBlock">
+                  <figure><img src="{{utils.file.toBase64Image(p.image)}}">
+                    <figcaption>
+                      <strong>{{ p.publicationDate | date: 'dd' }}</strong>{{ monthNames[p.publicationDate| date: 'M'] }}
+                    </figcaption>
+                  </figure>
+                </div>
+                <ng-template #elseBlock>
+                  <figure><img src="./assets/img/news_home_1.jpg">
+                    <figcaption>
+                      <strong>{{ p.publicationDate | date: 'dd' }}</strong>{{ monthNames[p.publicationDate| date: 'M'] }}
+                    </figcaption>
+                  </figure>
+                </ng-template>
+
+                <div class="short_info">
+                  <h3><strong>{{ p.title }} </strong></h3>
+                </div>
+              </a>
+              <div class="tour_title">
+                <p>{{ p.description }}</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <hr>
+
+        <mat-paginator #paginator (page)="handlePage($event)" [length]="totalSize" [pageIndex]="currentPage"
+                       [pageSizeOptions]="[8, 16, 32]"
+                       [pageSize]="pageSize" [showFirstLastButtons]="true"></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="map" id="map-home"
+     style="border-bottom:none; height:calc(100vh - 100px); width:100%; position: static"></div>
+
+<div class="mt-4 mb-4">
+  <swiper #swiperRef (slideChange)="onSlideChange($event)" [autoplay]="autoplay" [breakpoints]="breakpoints"
+          [loop]="true" [navigation]="navigation" [pagination]="pagination"
+          [scrollbar]="false" [spaceBetween]="50" [speed]="1000" class="dist-swiper"
+          slidesPerView="auto">
+    <ng-template *ngFor='let d of districts | async' let-data swiperSlide>
+      <div [class.active-slide]="data.isActive" [class.bg-blue]="data.isPrev" [class.bg-yellow]="data.isNext"
+           class="transition">
+        <div class="text-center">
+          <a [routerLink]="'/home-detail/'+d.id" class="dist-carousel-box">
+            <ng-template *ngIf="d.image !== null; else noImage">
+              <figure>
+                <img src="{{utils.file.toBase64Image(d.image)}}">
+                <figcaption><strong>{{ d.denomination }}</strong></figcaption>
+              </figure>
+            </ng-template>
+            <ng-template #noImage>
+              <i class="icon_set_1_icon-37"></i><span>{{ d.denomination }}</span>
+            </ng-template>
+          </a>
+        </div>
+      </div>
+    </ng-template>
+  </swiper>
+</div>
+
+<div class="white_bg">
+  <div class="container margin_60">
+    <div class="banner_2">
+      <div class="wrapper d-flex align-items-center opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.3)"
+           style="background-color: rgba(0, 0, 0, 0.3);">
+        <div>
+          <h3>PIATTAFORMA<br/>GUIGO'</h3>
+          <p>Lorem ipsum</p>
+          <a class="btn_1" href="#">Scopri di più</a>
+        </div>
+      </div>
+      <!-- /wrapper -->
+    </div>
+    <div class="banner_2">
+      <div class="wrapper d-flex align-items-center opacity-mask justify-content-end"
+           data-opacity-mask="rgba(0, 0, 0, 0.3)" style="background-color: rgba(0, 0, 0, 0.3);">
+        <div>
+          <h3>Portale<br/>di formazione</h3>
+          <p>Lorem ipsum</p>
+          <a class="btn_1" href="#">Scopri di più</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-news-home></app-news-home>
+

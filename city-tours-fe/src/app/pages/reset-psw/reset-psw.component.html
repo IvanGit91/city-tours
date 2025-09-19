@@ -1,0 +1,83 @@
+<div class="container">
+  <div *ngIf="currentUser.verify">
+    <app-title2 t_icon="lock" t_title="{{'TITLE.MOD_PSW'}}"></app-title2>
+  </div>
+  <div *ngIf="!currentUser.verify">
+    <app-title2 t_icon="lock" t_title="{{'TITLE.RESET_PSW'}}"></app-title2>
+    <p class="text-center font-italic">{{ 'MESSAGE.USER_RESET_PSW' | translate }}</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="psw">
+    <div class="mb-3">
+      <div class="row">
+        <div class="col-4 offset-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Current password</mat-label>
+            <input [formControl]="pswForm.passwordTemp" formControlName="passwordTemp" id="passwordTemp" matInput
+                   name="passwordTemp" placeholder="Inserisci la password attuale"
+                   type="password">
+            <mat-error *ngIf="pswForm.passwordTemp.hasError('required')">
+              <sup>*</sup>{{ 'LABELS.MANDATORY_FIELD' | translate }}
+            </mat-error>
+            <mat-error *ngIf="pswForm.passwordTemp.hasError('oldPswNotMatch')">
+              <sup>*</sup>{{ 'VALIDATION_MSG.OLD_PSW_NOT_MATCH' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 offset-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>New password</mat-label>
+            <input [formControl]="pswForm.newPassword" formControlName="newPassword" id="newPassword" matInput
+                   name="newPassword" placeholder="Inserisci la nuova password"
+                   type="password">
+            <mat-error *ngIf="pswForm.newPassword.hasError('sameOldPsw')">
+              <sup>*</sup>{{ 'VALIDATION_MSG.SAME_OLD_PSW' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="offset-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-4 offset-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Confirm password</mat-label>
+            <input [formControl]="pswForm.confirmPassword" formControlName="confirmPassword" id="confirmPassword" matInput
+                   name="confirmPassword" placeholder="Conferma la nuova password"
+                   type="password">
+            <mat-error *ngIf="pswForm.confirmPassword.hasError('mustMatch')">
+              <sup>*</sup>{{ 'VALIDATION_MSG.PSW_MUST_MATCH' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 offset-4">
+          <mat-password-strength #passwordComponent
+                                 (onStrengthChanged)="onStrengthChanged($event)"
+                                 [password]="pswForm.newPassword.value">
+          </mat-password-strength>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 offset-4">
+          <mat-password-strength-info
+            [passwordComponent]="passwordComponent"
+            digitsCriteriaMsg="{{ 'VALIDATION_MSG.PSW_INSERT_NUMBER' | translate }}"
+            lowerCaseCriteriaMsg="{{ 'VALIDATION_MSG.PSW_INSERT_LOWERCASE' | translate }}"
+            minCharsCriteriaMsg="{{ 'VALIDATION_MSG.PSW_INSERT_LENGTH' | translate }}"
+            specialCharsCriteriaMsg="{{ 'VALIDATION_MSG.PSW_INSERT_SPECIAL' | translate }}"
+            upperCaseCriteriaMsg="{{ 'VALIDATION_MSG.PSW_INSERT_UPPERCASE' | translate }}">
+          </mat-password-strength-info>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button [disabled]="!psw.valid" class="btn-block" color="primary" mat-button type="submit">
+        <mat-icon>done</mat-icon>
+        {{ 'CONFIRM' | translate }}
+      </button>
+    </div>
+  </form>
+</div>

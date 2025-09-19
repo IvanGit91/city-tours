@@ -1,0 +1,19 @@
+<div [class]="t_no_margin ? '' : 'mb-1 mt-5'" class="section-title">
+  <div *ngIf="t_go_back" class="text-left">
+    <button (click)="back()" color="primary" mat-button type="button">
+      <mat-icon>navigate_before</mat-icon>
+      {{ 'LABELS.BACK' | translate }}
+    </button>
+  </div>
+  <div class="text-center">
+    <div>
+      <mat-icon>{{ t_icon }}</mat-icon>
+      <span *ngIf="t_array; else noArray">
+        <h2 *ngFor="let t of t_title" class="position-relative d-inline" style="top:-5px"> {{ t | translate }} </h2>
+      </span>
+      <ng-template #noArray>
+        <h2 class="position-relative d-inline" style="top:-5px"> {{ t_title | translate }} </h2>
+      </ng-template>
+    </div>
+  </div>
+</div>

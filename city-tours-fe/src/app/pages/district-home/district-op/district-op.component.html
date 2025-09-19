@@ -1,0 +1,244 @@
+<div class="container">
+  <app-title2 [t_go_back]="true" t_icon="add"
+              t_title="{{isEdit ? 'TITLE.MOD_DISTRICT' : 'TITLE.ADD_DISTRICT'}}"></app-title2>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="district" enctype="multipart/form-data">
+    <input formControlName="id" id="id" name="id" type="hidden">
+    <div class="row">
+      <div class="col-sm-12 col-md-4 offset-sm-0 offset-md-2">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.DENOMINATION' | translate }}</mat-label>
+          <input [errorStateMatcher]="matcher" [formControl]="districtForm.denomination" formControlName="denomination" id="denomination"
+                 matInput name="denomination"
+                 placeholder="{{'LABELS.INSERT_FIELD' | translate}}" required type="text">
+          <mat-error *ngIf="districtForm.denomination.hasError('required')">
+            <sup>*</sup>{{ 'VALIDATION_MSG.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.ADDRESS' | translate }}</mat-label>
+          <input [errorStateMatcher]="matcher" [formControl]="districtForm.address" formControlName="address" id="address" matInput
+                 name="address" placeholder="{{'LABELS.INSERT_FIELD' | translate}}" type="text">
+        </mat-form-field>
+      </div>
+      <div class="offset-sm-0 offset-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-4 offset-sm-0 offset-md-2">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.PHONE' | translate }}</mat-label>
+          <app-dist-tel-input formControlName="phone"></app-dist-tel-input>
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.EMAIL' | translate }}</mat-label>
+          <input [errorStateMatcher]="matcher" [formControl]="districtForm.email" formControlName="email" id="email" matInput
+                 name="email" placeholder="{{'LABELS.INSERT_FIELD' | translate}}" type="text">
+          <mat-error *ngIf="districtForm.email.hasError('email')">
+            <sup>*</sup>{{ 'VALIDATION_MSG.EMAIL_NOT_VALID' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="offset-sm-0 offset-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-4 offset-sm-0 offset-md-2">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.WEBSITE' | translate }}</mat-label>
+          <input [errorStateMatcher]="matcher" [formControl]="districtForm.webSite" formControlName="webSite" id="webSite" matInput
+                 name="webSite" placeholder="{{'LABELS.INSERT_FIELD' | translate}}" type="text">
+          <mat-error *ngIf="districtForm.webSite.hasError('pattern')">
+            <sup>*</sup>{{ 'VALIDATION_MSG.FIELD_NOT_VALID' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.COLOR' | translate }}</mat-label>
+          <input [disabled]="disabled" [formControl]="districtForm.color" [ngxMatColorPicker]="picker" formControlName="color"
+                 matInput matTooltip="{{'LABELS.COLOR_RANDOM' | translate}}">
+          <ngx-mat-color-toggle [for]="picker" matSuffix></ngx-mat-color-toggle>
+          <ngx-mat-color-picker #picker [color]="color" [touchUi]="touchUi"></ngx-mat-color-picker>
+        </mat-form-field>
+      </div>
+      <div class="offset-sm-0 offset-md-2"></div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.DESCRIPTION' | translate }}</mat-label>
+          <textarea #autosize="cdkTextareaAutosize" [errorStateMatcher]="matcher" [formControl]="districtForm.description" cdkAutosizeMaxRows="5"
+                    cdkAutosizeMinRows="1"
+                    cdkTextareaAutosize formControlName="description" id="description"
+                    matInput name="description"
+                    placeholder="{{'LABELS.INSERT_FIELD' | translate}}">
+          </textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.DESCRIPTION_ENG' | translate }}</mat-label>
+          <textarea #autosize="cdkTextareaAutosize"
+                    [errorStateMatcher]="matcher"
+                    [formControl]="districtForm.descriptionEng"
+                    cdkAutosizeMaxRows="5"
+                    cdkAutosizeMinRows="1"
+                    cdkTextareaAutosize formControlName="descriptionEng" id="descriptionEng"
+                    matInput name="descriptionEng"
+                    placeholder="{{'LABELS.INSERT_FIELD' | translate}}">
+          </textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-sm-12 col-md-6">
+        <div class="dist-img-container">
+          <div class="text-center">
+            {{ 'MODELS.IMAGE' | translate }}
+          </div>
+          <mat-form-field appearance="outline" class="w-100 mat-file">
+            <mat-toolbar class="d-block">
+              <!-- Display files names -->
+              <div class="text-center">
+                <input class="d-none" formControlName="image" matInput name="name" readonly/>
+                <div>
+                  {{ imageName == null ? ('LABELS.CHOOSE_FILE' | translate) : imageName }}
+                </div>
+
+                <!-- Browse Button -->
+                <button color="primary" mat-flat-button>
+                  {{ 'LABELS.BROWSE_FILE' | translate }}
+                </button>
+              </div>
+            </mat-toolbar>
+
+            <input #imageInput (change)="uploadFileEvt($event, false)" accept="image/*" name="imageFile" type="file"/>
+          </mat-form-field>
+          <mat-card *ngIf="imageError" @myInsertRemoveTrigger class="card-error mb-2">
+            {{ imageCheck.message | translate : {max: imageCheck.messageMax} }}
+          </mat-card>
+
+          <mat-divider></mat-divider>
+
+          <ng-container *ngIf="imageName !== null; else noImage">
+            <div class="preview-container d-inline-block">
+              <span class="mr-1">{{ "LABELS.FILE_UPLOADED" | translate }}</span>
+              <figure>
+                <img alt="error" src="{{imageBase64}}">
+              </figure>
+              <span class="file-delete">
+                <mat-icon (click)="removeUploadedFile(false)" style="margin-left: 9px;">delete</mat-icon>
+              </span>
+            </div>
+          </ng-container>
+          <ng-template #noImage>
+            <div class="preview-container">
+              <span class="mr-1">{{ "LABELS.PREVIEW" | translate }}</span>
+              <figure style="margin-top: 5px;">
+                <img alt="preview" src="assets/img/tour_box_1.jpg">
+              </figure>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <div class="dist-img-container">
+          <div class="text-center">
+            {{ 'MODELS.LOGO' | translate }}
+          </div>
+          <mat-form-field appearance="outline" class="w-100 mat-file">
+            <div>
+              <mat-toolbar class="d-block">
+                <!-- Display files names -->
+                <div class="text-center">
+                  <input class="d-none" formControlName="logo" matInput name="name" readonly/>
+                  <div>
+                    {{ logoName == null ? ('LABELS.CHOOSE_FILE' | translate) : logoName }}
+                  </div>
+
+                  <!-- Browse Button -->
+                  <button color="primary" mat-flat-button>
+                    {{ 'LABELS.BROWSE_FILE' | translate }}
+                  </button>
+                </div>
+              </mat-toolbar>
+
+              <input #logoInput (change)="uploadFileEvt($event, true)" accept="image/*" name="logoFile" type="file"/>
+            </div>
+          </mat-form-field>
+          <mat-card *ngIf="logoError" @myInsertRemoveTrigger class="card-error mb-2">
+            {{ logoCheck.message | translate : {max: logoCheck.messageMax} }}
+          </mat-card>
+
+          <mat-divider></mat-divider>
+
+          <ng-container *ngIf="logoName !== null; else noLogo">
+            <div class="preview-container d-inline-block">
+              <span class="mr-1">{{ "LABELS.FILE_UPLOADED" | translate }}</span>
+              <figure>
+                <img alt="error" src="{{logoBase64}}">
+              </figure>
+              <span class="file-delete">
+                <mat-icon (click)="removeUploadedFile(true)" style="margin-left: 9px;">delete</mat-icon>
+              </span>
+            </div>
+          </ng-container>
+          <ng-template #noLogo>
+            <div class="preview-container">
+              <span class="mr-1">{{ "LABELS.PREVIEW" | translate }}</span>
+              <figure style="margin-top: 5px;">
+                <img alt="preview" src="assets/img/tour_box_1.jpg">
+              </figure>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <mat-card>
+          <div class="mb-1">{{ 'LABELS.CHOOSE_DISTRICT' | translate }}</div>
+          <mat-form-field appearance="outline" class="w-100 zero-padding">
+
+            <mat-label>{{ 'OPERATIONS.SEARCH' | translate }} {{ 'MODELS.CITY' | translate }}</mat-label>
+            <input (keydown)="onCityKey($event.target)" (keyup)="onCityKey($event.target)" [matAutocomplete]="auto" matInput
+                   type="text">
+            <mat-icon class="position-relative mat-icon-help-hover" matPrefix matTooltip="{{'LABELS.SEARCH_INPUT' | translate}}"
+                      matTooltipPosition="above" style="left: -5px;">help_outline
+            </mat-icon>
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option (onSelectionChange)="cityOnMap(c, $event);" *ngFor="let c of cities | async" [value]="c.name">
+                {{ c.name }}
+              </mat-option>
+            </mat-autocomplete>
+
+          </mat-form-field>
+        </mat-card>
+        <div class="map" id="map-dist"
+             style="border-bottom:none; height:calc(100vh - 100px); width:100%; position: static"></div>
+        <mat-card *ngIf="geoError" @myInsertRemoveTrigger class="card-error mb-2">
+          {{ 'VALIDATION_MSG.CHOOSE_DISTRICT' | translate }}
+        </mat-card>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center mb-3">
+        <button [disabled]="!district.valid" color="primary" mat-button type="submit">
+          <mat-icon>add</mat-icon>
+          {{ (isEdit ? 'OPERATIONS.MODIFY' : 'OPERATIONS.ADD') | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

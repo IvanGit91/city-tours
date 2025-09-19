@@ -1,0 +1,4 @@
+<div *ngIf="lazy; else elseBlock"><img [lazyLoad]="src" [ngClass]="{'respimg': true}"></div>
+<ng-template #elseBlock><img [ngClass]="{'respimg': true}" [src]="src"></ng-template>
+
+

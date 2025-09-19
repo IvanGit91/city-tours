@@ -1,0 +1,204 @@
+<div class="container">
+  <app-title2 [t_go_back]="true" t_icon="add" t_title="{{isEdit ? 'TITLE.MOD_POI' : 'TITLE.ADD_POI'}}"></app-title2>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="poi" enctype="multipart/form-data">
+    <input formControlName="id" id="id" name="id" type="hidden">
+    <div class="row">
+      <div class="col-sm-12 col-md-4 offset-sm-0 offset-md-2">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.DENOMINATION' | translate }}</mat-label>
+          <input [errorStateMatcher]="matcher" [formControl]="poiForm.denomination" formControlName="denomination" id="denomination"
+                 matInput name="denomination"
+                 placeholder="{{'LABELS.INSERT_FIELD' | translate}}" required type="text">
+          <mat-error *ngIf="poiForm.denomination.hasError('required')">
+            <sup>*</sup>{{ 'VALIDATION_MSG.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.TYPOLOGY' | translate }}</mat-label>
+          <mat-select #selected [compareWith]="compareFunction" formControlName="type" id="type" name="type" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let t of poiType | async" [value]="t.key">{{ t.key }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="poiForm.type.hasError('required')">
+            <sup>*</sup>{{ 'VALIDATION_MSG.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="offset-sm-0 offset-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-4 offset-sm-0 offset-md-2">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.PHONE' | translate }}</mat-label>
+          <app-dist-tel-input formControlName="phone"></app-dist-tel-input>
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.ADDRESS' | translate }}</mat-label>
+          <input [errorStateMatcher]="matcher" [formControl]="poiForm.address" formControlName="address" id="address" matInput
+                 name="address" placeholder="{{'LABELS.INSERT_FIELD' | translate}}" type="text">
+        </mat-form-field>
+      </div>
+      <div class="offset-sm-0 offset-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-4 offset-sm-0 offset-md-2">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.WEBSITE' | translate }}</mat-label>
+          <input [errorStateMatcher]="matcher" [formControl]="poiForm.webSite" formControlName="webSite" id="webSite" matInput
+                 name="webSite" placeholder="{{'LABELS.INSERT_FIELD' | translate}}" type="text">
+          <mat-error *ngIf="poiForm.webSite.hasError('pattern')">
+            <sup>*</sup>{{ 'VALIDATION_MSG.FIELD_NOT_VALID' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.EMAIL' | translate }}</mat-label>
+          <input [errorStateMatcher]="matcher" [formControl]="poiForm.email" formControlName="email" id="email" matInput
+                 name="email" placeholder="{{'LABELS.INSERT_FIELD' | translate}}" type="text">
+          <mat-error *ngIf="poiForm.email.hasError('email')">
+            <sup>*</sup>{{ 'VALIDATION_MSG.EMAIL_NOT_VALID' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="offset-sm-0 offset-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-4 offset-sm-0 offset-md-2">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.TIME' | translate }}</mat-label>
+          <input [errorStateMatcher]="matcher" [formControl]="poiForm.time" formControlName="time" id="time" matInput
+                 name="time" placeholder="{{'LABELS.INSERT_FIELD' | translate}}" type="text">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-4">
+      </div>
+      <div class="offset-sm-0 offset-md-2"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.DESCRIPTION' | translate }}</mat-label>
+          <textarea #autosize="cdkTextareaAutosize"
+                    [errorStateMatcher]="matcher"
+                    [formControl]="poiForm.description"
+                    cdkAutosizeMaxRows="5"
+                    cdkAutosizeMinRows="1"
+                    cdkTextareaAutosize formControlName="description" id="description"
+                    matInput name="description" placeholder="{{'LABELS.INSERT_FIELD' | translate}}">
+          </textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{ 'MODELS.DESCRIPTION_ENG' | translate }}</mat-label>
+          <textarea #autosize="cdkTextareaAutosize"
+                    [errorStateMatcher]="matcher"
+                    [formControl]="poiForm.descriptionEng"
+                    cdkAutosizeMaxRows="5"
+                    cdkAutosizeMinRows="1"
+                    cdkTextareaAutosize formControlName="descriptionEng" id="descriptionEng"
+                    matInput name="descriptionEng"
+                    placeholder="{{'LABELS.INSERT_FIELD' | translate}}">
+          </textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="dist-img-container">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <div class="text-center">
+            {{ 'MODELS.IMAGE' | translate }}
+          </div>
+          <mat-form-field appearance="outline" class="w-100 mat-file">
+            <mat-toolbar class="d-block">
+              <!-- Display files names -->
+              <div class="text-center">
+                <input class="d-none" formControlName="image" matInput name="name" readonly/>
+                <div>
+                  {{ imageName == null ? ('LABELS.CHOOSE_FILE' | translate) : imageName }}
+                </div>
+
+                <!-- Browse Button -->
+                <button color="primary" mat-flat-button>
+                  {{ 'LABELS.BROWSE_FILE' | translate }}
+                </button>
+              </div>
+            </mat-toolbar>
+
+            <input #imageInput (change)="uploadFileEvt($event)" accept="image/*" name="imageFile" type="file"/>
+          </mat-form-field>
+          <mat-card *ngIf="imageError" @myInsertRemoveTrigger class="card-error mb-2">
+            {{ imageCheck.message | translate : {max: imageCheck.messageMax} }}
+          </mat-card>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <ng-container *ngIf="imageName !== null; else noImage">
+            <div class="preview-container d-inline-block">
+              <span class="mr-1">{{ "LABELS.FILE_UPLOADED" | translate }}</span>
+              <figure style="margin-top: 5px;">
+                <img alt="error" src="{{imageBase64}}">
+              </figure>
+              <span class="file-delete">
+                <mat-icon (click)="removeUploadedFile()" style="margin-left: 9px;">delete</mat-icon>
+              </span>
+            </div>
+          </ng-container>
+          <ng-template #noImage>
+            <div class="preview-container">
+              <span class="mr-1">{{ "LABELS.PREVIEW" | translate }}</span>
+              <figure style="margin-top: 5px;">
+                <img alt="preview" src="assets/img/tour_box_1.jpg">
+              </figure>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <mat-card>
+          <div class="mb-1">{{ 'LABELS.CHOOSE_POI' | translate }}</div>
+          <mat-form-field appearance="outline" class="w-100 zero-padding">
+            <mat-label>{{ 'MODELS.DISTRICTS' | translate }}</mat-label>
+            <mat-select #selected [compareWith]="compareFunction" formControlName="district" id="district">
+              <mat-option>--</mat-option>
+              <mat-option (onSelectionChange)="selectDistrict(p, $event);" *ngFor="let p of districts | async"
+                          [value]="p">
+                {{ p.denomination }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="poiForm.district.hasError('required')">
+              <sup>*</sup>{{ 'LABELS.MANDATORY_FIELD' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </mat-card>
+        <div class="map" id="map-poi"
+             style="border-bottom:none; height:calc(100vh - 100px); width:100%; position: static"></div>
+        <mat-card *ngIf="geoError" @myInsertRemoveTrigger class="card-error mb-2">
+          {{ 'VALIDATION_MSG.CHOOSE_POI' | translate }}
+        </mat-card>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 text-center mb-3">
+        <button [disabled]="!poi.valid" color="primary" mat-button type="submit">
+          <mat-icon>add</mat-icon>
+          {{ (isEdit ? 'OPERATIONS.MODIFY' : 'OPERATIONS.ADD') | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

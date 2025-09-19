@@ -1,0 +1,53 @@
+<div class="text-center">
+  <h1 class="mat-dialog-title" mat-dialog-title>{{ data.denomination }}</h1>
+</div>
+<div class="mat-dialog-content dist-img-container" mat-dialog-content>
+
+  <mat-tab-group class="preview-container" mat-align-tabs="start">
+    <mat-tab label="{{'LABELS.DETAIL' | translate}}">
+
+      <mat-card class="dist-card-modal mb-5 ml-auto mr-auto">
+        <mat-card-header>
+          <mat-card-title>{{ 'MODELS.IMAGE' | translate }}</mat-card-title>
+          <mat-card-subtitle>
+            <figure>
+              <img alt="noimage"
+                   class="img-fluid dist-image-fluid" src="{{data.logo !== null ? data.logo : 'assets/img/tour_box_1.jpg'}}">
+            </figure>
+          </mat-card-subtitle>
+          <mat-card-title>{{ 'MODELS.DESCRIPTION' | translate }}</mat-card-title>
+          <mat-card-subtitle>{{ data.description }}</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+
+    </mat-tab>
+    <mat-tab label="Info">
+      <mat-card class="dist-card-modal mb-5 ml-auto mr-auto">
+        <mat-card-header>
+          <mat-card-title>{{ 'MODELS.TYPOLOGY' | translate }}</mat-card-title>
+          <mat-card-subtitle> {{ data.type }}</mat-card-subtitle>
+          <mat-card-title>{{ 'MODELS.ADDRESS' | translate }}</mat-card-title>
+          <mat-card-subtitle> {{ data.address }}</mat-card-subtitle>
+          <mat-card-title>{{ 'MODELS.PHONE' | translate }}</mat-card-title>
+          <mat-card-subtitle> {{ utils.phone.concatenate(data.phone) }}</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="Link">
+      <mat-card class="dist-card-modal mb-5 ml-auto mr-auto">
+        <mat-card-header>
+          <mat-card-title>{{ 'MODELS.WEBSITE' | translate }}</mat-card-title>
+          <mat-card-subtitle>
+            <app-dist-href [t_href]="data.webSite"></app-dist-href>
+          </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>
+<div class="mat-dialog-actions" mat-dialog-actions>
+  <button (click)="closeDialog()" class="mat-button mat-dialog-close" mat-button
+          mat-dialog-close>{{ 'LABELS.CLOSE' | translate }}
+  </button>
+</div>

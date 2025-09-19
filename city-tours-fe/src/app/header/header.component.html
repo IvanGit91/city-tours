@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark ">
+  <a [routerLink]="'/'" class="navbar-brand">PDT UI</a>
+  <button (click)="isMenuCollapsed = !isMenuCollapsed" [attr.aria-expanded]="!isMenuCollapsed"
+          aria-label="Toggle navigation" class="navbar-toggler"
+          type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a [routerLink]="'/home'" class="nav-link">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="'/link'" class="nav-link">Link</a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="'.'" class="nav-link disabled">Disabled</a>
+      </li>
+      <li class="nav-item" ngbDropdown>
+        <a [routerLink]="" aria-expanded="false" aria-haspopup="true"
+           class="nav-link" ngbDropdownToggle>Dropdown</a>
+        <div aria-labelledby="dropdown01" ngbDropdownMenu>
+          <a [routerLink]="" ngbDropdownItem>Action</a>
+          <a [routerLink]="" ngbDropdownItem>Another action</a>
+          <a [routerLink]="" ngbDropdownItem>Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item" ngbDropdown>
+        <a [routerLink]="" aria-expanded="false" aria-haspopup="true"
+           class="nav-link" ngbDropdownToggle>News</a>
+        <div aria-labelledby="dropdown01" ngbDropdownMenu>
+          <a [routerLink]="'/news-management'"
+             ngbDropdownItem>{{ 'OPERATIONS.MANAGE' | translate }} {{ 'MODELS.NEWS' | translate }}</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input aria-label="Search" class="form-control mr-sm-2" placeholder="Search" type="text">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
