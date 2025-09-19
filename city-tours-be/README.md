@@ -15,7 +15,6 @@ A comprehensive **Spring Boot 3.4.6** backend application for managing tourism (
 - [Database Schema](#database-schema)
 - [Contributing](#contributing)
 - [Future TODOs](#future-todos)
-- [License](#license)
 
 ## 🎯 About the Project
 
@@ -323,18 +322,6 @@ http://localhost:8083/tours
 - [ ] Monitoring and metrics integration
 - [ ] Docker containerization
 - [ ] CI/CD pipeline setup
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-### MIT License Summary
-- ✅ Commercial use allowed
-- ✅ Modification allowed
-- ✅ Distribution allowed
-- ✅ Private use allowed
-- ❌ No liability
-- ❌ No warranty
 
 ---
 

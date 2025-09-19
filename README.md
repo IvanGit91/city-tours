@@ -85,7 +85,15 @@ This full-stack application enables tourism authorities, content managers, and t
 
 ## 📄 License
 
-This project is licensed under the MIT License. See individual `LICENSE` files in each subproject for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### MIT License Summary
+- ✅ Commercial use allowed
+- ✅ Modification allowed
+- ✅ Distribution allowed
+- ✅ Private use allowed
+- ❌ No liability
+- ❌ No warranty
 
 ## 📞 Support
 

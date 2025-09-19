@@ -15,7 +15,6 @@ A modern Angular web application for managing and exploring city tours, district
 - [Testing](#testing)
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## 🌟 About the Project
 
@@ -367,14 +366,6 @@ city-tours-fe/
 - Update documentation as needed
 - Follow existing code patterns and conventions
 - Use meaningful commit messages
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-### MIT License Summary
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.
 
 ---
 
