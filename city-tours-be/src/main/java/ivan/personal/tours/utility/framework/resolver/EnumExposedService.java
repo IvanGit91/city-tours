@@ -84,7 +84,6 @@ public class EnumExposedService {
             fields.put("key", enumValue.name());
 
             // add description if requested
-            // TODO - multilanguage needs to be updated when locale changes
             if (exp.multilanguageDescription()) {
                 String enumMessageCode = getEnumMessageCode(enumValue.name());
                 fields.put(ENUM_DESCRIPTION, Multilanguage.getMessage(enumMessageCode, currentLocale));
