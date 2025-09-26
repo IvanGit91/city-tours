@@ -1,0 +1,52 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/tours
+    username: <username>
+    password: <password>
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    generate-ddl: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  mail:
+    host: smtp.gmail.com
+    port: 25
+    username: <username>
+    password: <password>
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+    ivan:
+      personal:
+        tours:
+          CityToursApplication: INFO
+
+jwtSecret: a-string-secret-at-least-256-bits-long
+jwtExpiration: 86400
+
+cors:
+  allowed-origins: http://localhost:3000,http://another-domain.com
+  allowed-methods: GET,POST,PUT,PATCH,DELETE,OPTIONS,HEAD
+  allowed-headers: Authorization,Content-Type,Accept-Language
+
+app:
+  mail:
+    sender: sender@demo.com
+  upload-resource: upload
+  host: http://localhost:3000/home
+  dev:
+    psw: '123'

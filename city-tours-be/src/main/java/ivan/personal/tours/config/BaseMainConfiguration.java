@@ -48,6 +48,7 @@ public class BaseMainConfiguration extends WebMvcConfigurationSupport {
     }
 
     // Solve the lazy loading problem
+    // TODO - remove, it can leads to n+1 query problem
     @Bean
     public FilterRegistrationBean<OpenEntityManagerInViewFilter> registerOpenEntityManagerInViewFilterBean() {
         FilterRegistrationBean<OpenEntityManagerInViewFilter> registrationBean = new FilterRegistrationBean<>();

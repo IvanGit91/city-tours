@@ -119,7 +119,7 @@ This application serves as the backend API for tourist district management syste
 ### Environment Configuration
 1. Copy the example configuration file:
    ```bash
-   cp src/main/resources/application-dev.properties.example src/main/resources/application-dev.properties
+   cp src/main/resources/application-dev.yml.example src/main/resources/application-dev.properties
    ```
 
 2. Edit `application-dev.properties` and configure:

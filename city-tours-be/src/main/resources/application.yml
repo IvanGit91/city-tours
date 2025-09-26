@@ -1,0 +1,37 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /tours
+
+spring:
+  profiles:
+    active: @spring.profiles.active@
+  
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+          lob:
+            non_contextual_creation: true
+    defer-datasource-initialization: true
+  
+  jackson:
+    property-naming-strategy: LOWER_CAMEL_CASE
+  
+  main:
+    allow-bean-definition-overriding: true
+  
+  queries:
+    users-query: select email, password, active from users where email=? and fv='S'
+    roles-query: select email, r.name from users u join roles r on u.role_id = r.id where email=? and fv='S'
+  
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 1000000KB
+      max-request-size: 1000000KB

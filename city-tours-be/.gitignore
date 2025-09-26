@@ -37,4 +37,5 @@ upload
 webapps
 sample-image
 src/main/resources/application-*.properties
+src/main/resources/application-*.yml
 WARP.md
